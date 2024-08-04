@@ -67,7 +67,16 @@ The Relayer responsabilities are
 *Poll Tallying (close polls - finalize claim)
 ![poll tallying](/images/poll_tallying.png)
 
+*Browser Extension* 
 
+We implemented a browser extension that will be in charge of:
+
+- Creating identities via Semaphore.
+- Storing identities' private keys.
+- Allowing users to join Curators or Validators groups via Semaphore.
+- Allowing Curators to flag a URL for misinformation (create a claim).
+- Allowing Validators to cast votes on open claims.
+- Displaying completed claims data with Curators' notes while browsing the web.
 
 *Repositories*
 
