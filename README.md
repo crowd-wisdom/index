@@ -28,6 +28,17 @@ MACI will be in charge of:
 - Tallying the final results for claims (coordinator)  
 - Finalizing claims (coordinator)
 
+*Claim Data Schema on EAS Scroll*
+
+Schema UID: 0x89b0b48cba2a362eebc656ec1a7fa92ee0a952dc985e3f5c63faceaa2bbfcd8d
+
+Url: 
+https://scroll-sepolia.easscan.org/schema/view/0x89b0b48cba2a362eebc656ec1a7fa92ee0a952dc985e3f5c63faceaa2bbfcd8d
+
+Raw Schema:
+
+{string sourceUrl, string title, string notes, bool finalized, bool approved}
+
 Relayer
 We implement this using NATS.io messaging.
 
@@ -58,5 +69,11 @@ The Relayer responsabilities are
 
 
 
+*Repositories*
 
+CrowdWisdom org https://github.com/crowd-wisdom
+CrowdWisdom Index repo: https://github.com/crowd-wisdom/index
+CrowdWisdom Semaphore Anon Interactions repo: https://github.com/crowd-wisdom/semaphore-anon-interactions
+CrowdWisdom MACI voting infra: https://github.com/crowd-wisdom/maci-voting
+CrowdWisdom Browser Extension:  https://github.com/crowd-wisdom/browser-extension
 
