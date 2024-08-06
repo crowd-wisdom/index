@@ -28,16 +28,23 @@ MACI will be in charge of:
 - Tallying the final results for claims (coordinator)  
 - Finalizing claims (coordinator)
 
-*Claim Data Schema on EAS Scroll*
+*Claim and Tallying Schemas on EAS Scroll*
 
-Schema UID: 0x89b0b48cba2a362eebc656ec1a7fa92ee0a952dc985e3f5c63faceaa2bbfcd8d
+Claim Schema
+Schema UID: 0xc31d7adade58b99a9854299c96caeb583941e6b80a91929b560a5fcb43eff156
 
-Url: 
-https://scroll-sepolia.easscan.org/schema/view/0x89b0b48cba2a362eebc656ec1a7fa92ee0a952dc985e3f5c63faceaa2bbfcd8d
+[URL](https://scroll-sepolia.easscan.org/schema/view/0xc31d7adade58b99a9854299c96caeb583941e6b80a91929b560a5fcb43eff156)
 
-Raw Schema:
+Raw Schema: {string sourceUrl,string title,string notes}
 
-{string sourceUrl, string title, string notes, bool finalized, bool approved}
+Tallying Schema
+This is a componentized schema, that is this schema include a the schema UID of the related Claim Schema (claimUId)
+
+Schema UID: 0x05199bc6f64c47758b984f8740c3e013d9ac5c92c3d317654281efe027921208
+
+[URL](https://scroll-sepolia.easscan.org/schema/view/0x05199bc6f64c47758b984f8740c3e013d9ac5c92c3d317654281efe027921208)
+
+Raw Schema: {address claimUid,bool finalized,bool approved}
 
 Relayer
 We implement this using NATS.io messaging.
