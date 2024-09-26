@@ -8,7 +8,7 @@ Our goal is to create a decentralized platform for verifying the validity of new
 
 The platform stands into two building blocks developed by PSE : *Semaphore* and *MACI*. 
 Additionally the claim data (schema) wil be created on EAS Scroll that eventually would allow to make attestation over it.
-Finally a Relayer is included to manage subscription and publish messages with Maci.
+Finally a Relayer is included to manage subscription and publish messages with MACI.
 
 
 *Semaphore will be in charge of:*
@@ -19,8 +19,8 @@ Curators are individuals who challenge misinformation by providing clear evidenc
 Validators are responsible for verifying the provided evidence and voting to accept or reject the claims.
 Anonymous signaling for managing interaction with MACI.
 Interaction will be from:
-- curators to create claims submissions 
-- validators to cast votes for those claims.
+- Curators to create claims submissions 
+- Validators to cast votes for those claims.
 
 MACI will be in charge of:
 - Creating the claims submission from curators. 
@@ -62,28 +62,54 @@ The Relayer responsabilities are
 *Identity Creation*
 ![create identity](/images/identity_creation.png)
 
+First, a decentralized KYC service such as TrustGo is used. Once this test is passed, an identity is then created in Semaphore. The Relayer then performs the signup in the MACI infrastructure.
+Curator Create Claim.
+
 *Curator Create Claim*
+
 ![create identity](/images/curator_create_claim.png)
 
 *Validator Cast Vote to Claim*
-![create identity](/images/validator_cast_vote.png)
+![validator_cast_vote](https://github.com/user-attachments/assets/86d9b9b5-de55-4ecf-ae5c-ebdf47a58d23)
+Validators are anonymous. Using a random selection mechanism, a certain number of validators are chosen to validate the claim.
 
 *General User View*
 ![create identity](/images/user_view_finalized_claim.png)
+Notes must receive at least 90% "helpful" votes to be recommended.
 
 *Poll Tallying (close polls - finalize claim)
 ![poll tallying](/images/poll_tallying.png)
 
-*Browser Extension* 
 
-We implemented a browser extension that will be in charge of:
+### Architecture:
 
+Minimal Anti-Collusion Infrastructure (MACI) .In charge of:
+- Sign Up users.
+- Creating the claims (Polls).
+- Casting votes.
+- Validate the proof of tally result.
+
+
+Semaphore:
+- Used to configure and enforce the eligibility criteria of voters who can participate in MACI polls.
+
+Ethereum Attestation Service (EAS):
+- For the claim data (schema).
+
+NestJS API (Relayer):
+- Check for open polls (opened claims) over MACI fetching. Followed by a publish to CW extension to notify for an opened claim on the current url.
+- Check for finalized polls (tallying completed) over MACI fetching.
+- Check for due polls (not finalized polls) over MACI , that is the poll that is due date is over but tallying is not completed. The relayer will submit to MACI to complete the tallying and finalize the poll. The tallying will be performed on behalf of the trusted 
+  coordinator that has the permission to close polls.
+
+CW browser extension:
 - Creating identities via Semaphore.
-- Storing identities' private keys.
+- Storing identities private keys.
 - Allowing users to join Curators or Validators groups via Semaphore.
 - Allowing Curators to flag a URL for misinformation (create a claim).
 - Allowing Validators to cast votes on open claims.
-- Displaying completed claims data with Curators' notes while browsing the web.
+- Displaying completed claims data with Curators notes while browsing the web.
+
 
 *Repositories*
 
